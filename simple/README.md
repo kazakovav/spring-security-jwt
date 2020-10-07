@@ -13,5 +13,5 @@ openssl genpkey -out jwt.pem -algorithm RSA -pkeyopt rsa_keygen_bits:2048
 For public key generation use the below commands.
 
 ````
-openssl rsa -in jwt.pem -pubout
+openssl rsa -in jwt.pem -pubout > jwt.pub
 ````
