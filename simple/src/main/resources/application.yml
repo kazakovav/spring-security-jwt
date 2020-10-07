@@ -1,0 +1,14 @@
+app.version: v1
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          public-key-location: classpath:jwt.pub
+
+
+
+jwt:
+  token-validity-in-seconds: 86400
+  pem-file-path: jwt.pem
