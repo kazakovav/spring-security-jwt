@@ -24,7 +24,7 @@ class AuthenticationController(
 
     @PostMapping("/login")
     fun authenticate(@RequestBody authenticationRequest: AuthenticationRequest): AuthenticationResponse {
-        if (!"admin".equals(authenticationRequest.userName) && !"adminPassword".equals(authenticationRequest.password)) {
+        if ("admin" != authenticationRequest.userName && "adminPassword" != authenticationRequest.password) {
             throw UsernameNotFoundException("User name not found")
         }
         val userName = authenticationRequest.userName
