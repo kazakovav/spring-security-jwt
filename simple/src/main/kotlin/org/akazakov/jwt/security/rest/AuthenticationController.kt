@@ -5,6 +5,7 @@ import org.akazakov.jwt.security.api.dto.AuthenticationResponse
 import org.akazakov.jwt.security.api.dto.UserRoles
 import org.akazakov.jwt.security.service.TokenBuilder
 import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.oauth2.jwt.Jwt
 import org.springframework.web.bind.annotation.*
 
@@ -23,6 +24,9 @@ class AuthenticationController(
 
     @PostMapping("/login")
     fun authenticate(@RequestBody authenticationRequest: AuthenticationRequest): AuthenticationResponse {
+        if (!"admin".equals(authenticationRequest.userName) && !"adminPassword".equals(authenticationRequest.password)) {
+            throw UsernameNotFoundException("User name not found")
+        }
         val userName = authenticationRequest.userName
         val authorities = listOf(UserRoles.USER.name, UserRoles.ADMIN.name)
 
