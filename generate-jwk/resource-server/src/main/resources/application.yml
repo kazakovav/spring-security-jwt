@@ -1,0 +1,7 @@
+app.version: v1
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8484/.well-known/jwks.json

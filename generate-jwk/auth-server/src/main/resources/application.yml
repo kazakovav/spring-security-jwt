@@ -1,0 +1,6 @@
+app.version: v1
+server:
+  port: 8484
+jwt:
+  token-validity-in-seconds: 30
+  pem-file-path: jwt.pem

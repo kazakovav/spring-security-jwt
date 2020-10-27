@@ -1,0 +1,17 @@
+###
+GET http://localhost:8484/version
+
+
+###
+POST http://localhost:8484/login
+Content-Type: application/json
+
+{
+  "userName": "admin",
+  "password": "adminPassword"
+}
+
+> {% client.global.set("auth_token", response.body.token); %}
+
+###
+GET http://localhost:8484/.well-known/jwks.json
