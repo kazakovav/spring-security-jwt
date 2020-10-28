@@ -11,17 +11,19 @@ import java.security.SecureRandom
 import java.security.Security
 import java.security.interfaces.RSAPrivateKey
 import java.security.interfaces.RSAPublicKey
+import java.util.*
 import javax.annotation.PostConstruct
 
 @Component
 class KeyProviderImpl(private val jwtProperties: JwtProperties) : KeyProvider {
     private lateinit var keyPair: KeyPair
+    private lateinit var keyId: UUID
 
     @PostConstruct
     fun afterPropertiesSet(): Unit {
         log.info("Loaded properties: $jwtProperties")
-
         keyPair = generateKeyPair();
+        keyId = UUID.randomUUID();
     }
 
     private fun generateKeyPair(): KeyPair {
@@ -35,7 +37,7 @@ class KeyProviderImpl(private val jwtProperties: JwtProperties) : KeyProvider {
 
     override fun getPublicKey(): RSAPublicKey = keyPair.public as RSAPublicKey
 
-    override fun getKeyId(): String = KEY_ID
+    override fun getKeyId(): String = keyId.toString()
 
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
@@ -47,8 +49,5 @@ class KeyProviderImpl(private val jwtProperties: JwtProperties) : KeyProvider {
 
         @JvmStatic
         val KEY_SIZE = 2048
-
-        @JvmStatic
-        val KEY_ID = "test-key-id"
     }
 }
