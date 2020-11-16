@@ -1,0 +1,16 @@
+###
+GET http://localhost:8080/version
+
+###
+POST http://localhost:8484/auth/realms/spring-security-jwt/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=spring-jwt-client&grant_type=password&scope=openid&username=test_user&password=test_user
+
+
+> {% client.global.set("auth_token", response.body.access_token); %}
+
+###
+GET http://localhost:8080/me
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
