@@ -1,0 +1,7 @@
+app.version: v1
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${KEYCLOAK_REALM_CERT_URL:http://localhost:8484/auth/realms/spring-security-jwt/protocol/openid-connect/certs}
